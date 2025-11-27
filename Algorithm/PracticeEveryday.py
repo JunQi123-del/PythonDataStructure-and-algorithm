@@ -4,88 +4,134 @@
 arr= [10,2,5,11,4,2]
 
 def insertionSort(arr):
-    #TODO everyday
-    for i in range(1,len(arr)):
+    mergeArr = arr
+    for i in range(1,len(mergeArr)):
         for j in range(0,i):
-            if arr[i]<arr[j]:
-                arr[i],arr[j] = arr[j],arr[i]
+            if mergeArr[j]>mergeArr[i]:
+                mergeArr[j],mergeArr[i] = mergeArr[i],mergeArr[j]
 
-    print(f"After insertion sort: {arr}")
+    print(f"After insertionSort: {mergeArr}")
+
 
 #Selection Sort
 #swap the smallest number of the array with the first element of the unsorted part of the array
 
 def selectionSort(arr):
     #TODO every day:
-    for i in range(len(arr)-1):
+    sorted = arr
+    for i in range(len(sorted)-1):
         min = i
-        for j in range(i,len(arr)):
-            if arr[min]>arr[j]:
+        for j in range(i+1,len(sorted)):
+            if sorted[j]<sorted[min]:
                 min = j
 
-        arr[min],arr[i] = arr[i],arr[min]
+        sorted[min],sorted[i] = sorted[i],sorted[min]
 
-    print(f"After Selection sort: {arr}")
+    print(f"After selection sort is: {sorted}")
 
 
 #swapping the current index and the next index to the correct order, iterate the entire list for each index in the list
 def bubbleSort(arr):
     #Todo everyday
-
-    for i in range(len(arr)):
-        for j in range(i+1,len(arr)):
-            if arr[j-1]>arr[j]:
+    sorted = arr
+    for i in range(len(sorted)):
+        for j in range(1,len(sorted)-i-1):
+            if arr[j-1]>=arr[j]:
                 arr[j-1],arr[j] = arr[j],arr[j-1]
+    
+    print(f"After bubble sort : {sorted}")
 
-    print(f"after Bubble sort: {arr}")
+
 
 def Recursion(n):
     print("Recursive behaviour")
 
-def mergeSort(arr):
 
+def mergeSort(arr):
     if len(arr)<=1:
         return arr
     
     mid = len(arr)//2
 
-    left = mergeSort(arr[:mid])
-    right = mergeSort(arr[mid:])
+    left = mergeSort(arr[mid:])
+    right = mergeSort(arr[:mid])
 
     return merge(left,right)
+    
 
     
 def merge(left,right):
-
     leftPointer = 0
     rightPointer = 0
     merged = []
 
     while leftPointer<len(left) and rightPointer<len(right):
-        if left[leftPointer] < right[rightPointer]:
+        if left[leftPointer]<right[rightPointer]:
             merged.append(left[leftPointer])
             leftPointer+=1
-        elif left[leftPointer] > right[rightPointer]:
+        elif left[leftPointer]>right[rightPointer]:
             merged.append(right[rightPointer])
             rightPointer+=1
         else:
             merged.append(left[leftPointer])
-            merged.append(right[rightPointer])
             leftPointer+=1
+            merged.append(right[rightPointer])
             rightPointer+=1
     
     merged.extend(left[leftPointer:])
     merged.extend(right[rightPointer:])
-
+    
     return merged
+
+def recurBinarySearch(arr,n):
+    #recursive method
+    if len(arr)<=1:
+        return False
+    
+    mid = len(arr)//2
+
+    if arr[mid] == n:
+        return True
+    elif arr[mid]>n:
+        return recurBinarySearch(arr[:mid],n)
+    elif arr[mid]<n:
+        return recurBinarySearch(arr[mid:],n)
+    
+def itiBinarySearch(arr,n):
+    left = 0
+    right = len(arr)-1
+
+    while left<=right:
+        mid = (left+right)//2
+
+        if arr[mid]<n:
+            left = mid+1
+        elif arr[mid]>n:
+            right = mid-1
+        else:
+            return mid
+    return -1
 
 
 
     
 if __name__ == "__main__":
-    # insertionSort(arr)
-    #selectionSort(arr)
+    insertionSort(arr)
+    selectionSort(arr)
     bubbleSort(arr)
     merged = mergeSort(arr)
     print(f"After merged sort: {merged}")
+
+    # searching algorithm
+    index = recurBinarySearch(arr,3)
+    if not index:
+        print(f"The number is not found")
+    else:
+        print(f"The number is found at index {index}")
+
+    index = itiBinarySearch(arr,10)
+    if index== -1:
+        print(f"The number is not found")
+    else:
+        print(f"The number is found at index {index}")
 
