@@ -22,9 +22,8 @@ def selectionSort(arr):
     for i in range(len(sorted)-1):
         min = i
         for j in range(i+1,len(sorted)):
-            if sorted[j]<sorted[min]:
+            if sorted[min]<sorted[j]:
                 min = j
-
         sorted[min],sorted[i] = sorted[i],sorted[min]
 
     print(f"After selection sort is: {sorted}")
@@ -35,9 +34,9 @@ def bubbleSort(arr):
     #Todo everyday
     sorted = arr
     for i in range(len(sorted)):
-        for j in range(1,len(sorted)-i-1):
-            if arr[j-1]>=arr[j]:
-                arr[j-1],arr[j] = arr[j],arr[j-1]
+        for j in range(len(sorted)-i-1):
+            if sorted[j+1]<sorted[j]:
+                sorted[j+1],sorted[j] = sorted[j],sorted[j+1]
     
     print(f"After bubble sort : {sorted}")
 
@@ -53,49 +52,37 @@ def mergeSort(arr):
     
     mid = len(arr)//2
 
-    left = mergeSort(arr[mid:])
-    right = mergeSort(arr[:mid])
+    left = mergeSort(arr[:mid])
+    right = mergeSort(arr[mid:])
+
 
     return merge(left,right)
-    
-
     
 def merge(left,right):
     leftPointer = 0
     rightPointer = 0
     merged = []
 
-    while leftPointer<len(left) and rightPointer<len(right):
-        if left[leftPointer]<right[rightPointer]:
+    while len(left)>leftPointer and len(right)>rightPointer:
+        if left[leftPointer]>right[rightPointer]:
             merged.append(left[leftPointer])
             leftPointer+=1
-        elif left[leftPointer]>right[rightPointer]:
+        elif right[rightPointer]>left[leftPointer]:
             merged.append(right[rightPointer])
             rightPointer+=1
-        else:
-            merged.append(left[leftPointer])
-            leftPointer+=1
-            merged.append(right[rightPointer])
-            rightPointer+=1
-    
+        
     merged.extend(left[leftPointer:])
     merged.extend(right[rightPointer:])
-    
+
     return merged
+
+
 
 def recurBinarySearch(arr,n):
     #recursive method
-    if len(arr)<=1:
-        return False
-    
-    mid = len(arr)//2
 
-    if arr[mid] == n:
-        return True
-    elif arr[mid]>n:
-        return recurBinarySearch(arr[:mid],n)
-    elif arr[mid]<n:
-        return recurBinarySearch(arr[mid:],n)
+    pass
+
     
 def itiBinarySearch(arr,n):
     left = 0
@@ -104,12 +91,15 @@ def itiBinarySearch(arr,n):
     while left<=right:
         mid = (left+right)//2
 
-        if arr[mid]<n:
-            left = mid+1
+        if arr[mid] == n :
+            return mid
+        
         elif arr[mid]>n:
             right = mid-1
-        else:
-            return mid
+        
+        elif arr[mid]<n:
+            left = mid + 1
+    
     return -1
 
 
@@ -129,7 +119,7 @@ if __name__ == "__main__":
     else:
         print(f"The number is found at index {index}")
 
-    index = itiBinarySearch(arr,10)
+    index = itiBinarySearch(merged,10)
     if index== -1:
         print(f"The number is not found")
     else:
