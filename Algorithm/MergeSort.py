@@ -37,5 +37,5 @@ def merge(left,right):
     return merged
 
 if __name__ == "__main__":
-    merged = merge_sort(arr)
+    merged = mergeSort(arr)
     print(f"After merged sorting {merged}")

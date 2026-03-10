@@ -7,9 +7,9 @@ def insertionSort(arr):
     mergeArr = arr
     for i in range(1,len(mergeArr)):
         for j in range(0,i):
-            if mergeArr[j]>mergeArr[i]:
-                mergeArr[j],mergeArr[i] = mergeArr[i],mergeArr[j]
-
+            if mergeArr[i]<mergeArr[j]:
+                mergeArr[i],mergeArr[j] = mergeArr[j],mergeArr[i]
+ 
     print(f"After insertionSort: {mergeArr}")
 
 
@@ -18,25 +18,23 @@ def insertionSort(arr):
 
 def selectionSort(arr):
     #TODO every day:
-    sorted = arr
-    for i in range(len(sorted)-1):
+    mergeArr = arr
+    for i in range(len(mergeArr)-1):
         min = i
-        for j in range(i+1,len(sorted)):
-            if sorted[min]<sorted[j]:
+        for j in range(i+1,len(mergeArr)):
+            if mergeArr[min]>mergeArr[j]:
                 min = j
-        sorted[min],sorted[i] = sorted[i],sorted[min]
+        
+        mergeArr[min],mergeArr[i] = mergeArr[i],mergeArr[min]
 
-    print(f"After selection sort is: {sorted}")
+
+    print(f"After selection sort is: {mergeArr}")
 
 
 #swapping the current index and the next index to the correct order, iterate the entire list for each index in the list
 def bubbleSort(arr):
     #Todo everyday
-    sorted = arr
-    for i in range(len(sorted)):
-        for j in range(len(sorted)-i-1):
-            if sorted[j+1]<sorted[j]:
-                sorted[j+1],sorted[j] = sorted[j],sorted[j+1]
+
     
     print(f"After bubble sort : {sorted}")
 
