@@ -31,3 +31,15 @@ def getKFrequentNumber():
 if __name__ == "__main__":
     result = getKFrequentNumber()
     print(f"{result}")
+
+#Step 1 
+#Use map to map all the number in the list to their frequency in the list, this allows us to know the frequency of each occurence of the number
+#But we do not know which number is the highest frequency against each other and we do not know which are the higgest number in the list
+
+#step 2
+# Use list to find out the higgest frequency to the number in the list (Using index as freqency)
+# create empty lists in side a list where which = to length of actual list + 1 (You plus one to discount the 0 so you know exactly the length in human language)
+# The index of the list inside = frequency, the val of the list = to the number in the dataset
+
+#step 3 
+#step take the val from the back of the list until length of the new list = to K 
